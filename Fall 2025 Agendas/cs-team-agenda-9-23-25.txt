@@ -1,0 +1,41 @@
+Agenda 9/23/25 
+
+Research Meeting! 
+
+
+Current issues for CS: 
+
+- Box loses connectivity and no longer transmits data once buried 
+
+ 
+
+Today’s tasks: 
+
+- Make sure everyone can access project files! (BOO ONEDRIVE) 
+
+- Introduce current code 
+
+- GitHub tutorial/run-through 
+
+
+Research tasks: 
+
+- Find out if we can have an antenna with the Arduino board and if admin allows it. 
+
+- Reseach code to use an antenna for connectivity 
+
+- Research how to read and write files to and from external storage (Likely SD card) 
+
+
+Secondary tasks: 
+
+- Figure out how to make code more efficient/code cleanup 
+
+- More research on power efficiency or perform calculations/think of logic to better implement deepSleep 
+
+
+REMINDER: 
+
+Provide ample documentation with your research and code changes! 
+
+You can do that either by creating a new text file documenting your findings/changes, or filling out the descriptions after you commit to GitHub 
