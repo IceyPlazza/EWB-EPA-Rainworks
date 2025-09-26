@@ -1,10 +1,10 @@
 Components: 
 
 
-https://thingspeak.com/channels/2026236 
+- https://thingspeak.com/channels/2026236 
 
 
-https://www.sparkfun.com/products/13231 
+- https://www.sparkfun.com/products/13231 
 
 
 Here is the board we will be using, the link has some basic information about it.  
@@ -100,5 +100,8 @@ Estimate Power Consumption
 https://docs.arduino.cc/learn/electronics/power-consumption/#power-consumption-example 
 
 Team Document: Power Usage of ESP8266 
+
+SD Library:
+https://docs.arduino.cc/libraries/sd/
 
  
