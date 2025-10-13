@@ -1,0 +1,4 @@
+1. Primary Task: Finish SD card read and write logic.
+- Figure out how to split uint16_t into 2 separate bytes.
+
+2. Secondary Task: convert raw voltage values to human-readable data.
