@@ -40,7 +40,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   connectWifi();
   ThingSpeak.begin(client);
-  writeAll();
+  writeMain();
 
   //Let's wait an extra tenth of a second just in case there's any delays we might have to deal with
   Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
@@ -179,5 +179,12 @@ void writeToThingSpeak(uint16_t dataArray[]){
   //TODO: OVERHAUL THIS
 */
 void writeMain(){
-  
+  //First, check if we have wifi.
+    //If we have wifi, check if we have files in SD to read and send
+      //Send all of our files
+    //Send our new readings
+  //If we do not have wifi
+    //Read from sensors
+    //Write to SD card
 }
+
