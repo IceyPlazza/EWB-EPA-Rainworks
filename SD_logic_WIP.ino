@@ -39,9 +39,7 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
         uint8_t bytes[0] = myFile.read();
         uint8_t bytes[1] = myFile.read();
 
-        uint16_t combinedValue = combineBytes(highByte, lowByte);
-
-        dataFields[i] = combinedValue;
+        dataFields[i] = combineBytes(bytes);
       }
     }
     myFile.close();
