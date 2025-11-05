@@ -29,13 +29,15 @@ void writeToSD(uint16_t[] dataArray){
 }
 
 /*
-readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
+readAllFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
 precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
 postcondition - files read are deleted upon completion
 
 @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
 */
-uint16_t[] readFromSD(uint16_t[] dataArray){
+// Opens SD card to read a file into in 2 bytes
+// @param dataArray: the array holding the data to read
+uint16_t[] readAllFromSD(uint16_t[] dataArray){
   initializeSD();
 
   File myFile = SD.open("/");
@@ -44,21 +46,37 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
   //Assume that Wifi will last long enough to transmit all data and delete all files.
   size_t fileNum = 0;
   while(SD.exists("data" + String(fileNum) + ".txt")){
-    myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
-    //TODO: add logic to read and combine bytes
-    for (int i = 0, i < 5, i++) {
-      if (myFile.available()) {
-        uint8_t bytes[2];
-        uint8_t bytes[0] = myFile.read();
-        uint8_t bytes[1] = myFile.read();
-
-        dataFields[i] = combineBytes(bytes);
-      }
-    }
-    myFile.close();
-    SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
     ++fileNum;
   }
+
+  while(SD.exists("data" + String(fileNum) + ".txt")){
+    readFromSD(dataArray, fileNum)
+    ++fileNum;
+  }
+
+  myFile.close();
+  SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
+
+  return dataArray;
+}
+
+//TODO: ADD METHOD HEADERS
+uint16_t[] readFromSD(uint16_t[] dataArray, fileNum){
+  //Read one file at a time
+  myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
+  //TODO: add logic to read and combine bytes
+  for (int i = 0, i < 5, i++) {
+    if (myFile.available()) {
+      uint8_t bytes[2];
+      uint8_t bytes[0] = myFile.read();
+      uint8_t bytes[1] = myFile.read();
+
+      dataFields[i] = combineBytes(bytes);
+    }
+  }
+  myFile.close();
+  SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
+
   return dataArray;
 }
 
