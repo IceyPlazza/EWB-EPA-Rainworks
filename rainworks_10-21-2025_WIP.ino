@@ -238,23 +238,28 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
 
 /*
   writeMain -- function to determine whether to write directly to ThingSpeak or to SD card
-  //TODO: OVERHAUL THIS
+  //TODO: ADD TO THIS; DONT HESITATE TO EDIT OR CHANGE LOGIC IF YOU DISCOVER SOMETHING BETTER
 */
+int numFilesInSD = 0; // Temporary int for checking how many files in SD to read until the check-if-file-exists
+                              // implemented in the read sd card method
+
 void writeMain(){
   //First, check if we have wifi.
+  if (checkWifiStatus()) {
     //If we have wifi, check if we have files in SD to read and send
-      //Send all of our files
+    for (int i = numFilesInSD; i > 0; ++i) { // Temporary int placeholder to see if files exist
+      writeToThingSpeak(readFromSD(5)); // Looks like the readFromSD reads multiple files? Not sure how that would work
+      delay(120); // 2 min delay
+    }
+
+    // Read and send form sensors
+   
+  }
     //Send our new readings
   //If we do not have wifi
     //Read from sensors
     //Write to SD card
 }
-
-/*
-/////////////////////////////////////////////////////////////////
-  Please keep all helper methods for MINOR LOGIC below this line
-/////////////////////////////////////////////////////////////////
-*/
 
 /*
 initializeSD - a void helper method to initialize the SD card. 
@@ -295,3 +300,4 @@ uint16_t combineBytes(uint8_t[] bytes){
   memcpy(twoBytes, &bytes, 2);
   return twoBytes;
 }
+
