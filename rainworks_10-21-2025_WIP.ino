@@ -267,16 +267,20 @@ Will sleep and prematurely stop the program if SD card cannot be initialized.
 */
 void initializeSD(){
   //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
-  SD.begin(); 
   Serial.print("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
+    int success = SD.begin(); 
     Serial.print("Initializing attempt: " + String(i));
+    if (success == 1){
+      Serial.print("SD Card Initialized!");
+      return;
+    }
+    delay(5000); //Was told it needs 5-10 sec to connect
     if (i == 5){
       Serial.print("Initialization failed!");
       ESP.deepSleep(3600e6); //Sleep if we failed to initialize
     }
   }
-  Serial.print("SD Card Initialized!");
 }
 
 /*
@@ -300,4 +304,5 @@ uint16_t combineBytes(uint8_t[] bytes){
   memcpy(twoBytes, &bytes, 2);
   return twoBytes;
 }
+
 
