@@ -45,17 +45,14 @@ uint16_t[] readAllFromSD(uint16_t[] dataArray){
   //Based on our naming scheme, here is how we will be tracking existing files.
   //Assume that Wifi will last long enough to transmit all data and delete all files.
   size_t fileNum = 0;
-  while(SD.exists("data" + String(fileNum) + ".txt")){
-    ++fileNum;
-  }
 
   while(SD.exists("data" + String(fileNum) + ".txt")){
     readFromSD(dataArray, fileNum)
+    SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
     ++fileNum;
   }
 
   myFile.close();
-  SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
 
   return dataArray;
 }
@@ -75,7 +72,6 @@ uint16_t[] readFromSD(uint16_t[] dataArray, fileNum){
     }
   }
   myFile.close();
-  SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
 
   return dataArray;
 }
@@ -86,16 +82,20 @@ Will sleep and prematurely stop the program if SD card cannot be initialized.
 */
 void initializeSD(){
   //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
-  SD.begin(); 
   Serial.print("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
+    int success = SD.begin(); 
     Serial.print("Initializing attempt: " + String(i));
+    if (success == 1){
+      Serial.print("SD Card Initialized!");
+      return;
+    }
+    delay(5000); //Was told it needs 5-10 sec to connect
     if (i == 5){
       Serial.print("Initialization failed!");
       ESP.deepSleep(3600e6); //Sleep if we failed to initialize
     }
   }
-  Serial.print("SD Card Initialized!");
 }
 
 /*
