@@ -23,7 +23,7 @@ SPISettings adcSettings(100000, MSBFIRST, SPI_MODE0);
 //Extra needed variables
 bool isRaining = false; //Check if raining or not
 int rainingFast = 20; //Value if it's raining fast. Can figure out later
-int deepSleepTime = 30e6; //Variable to determine how long to sleep for: 30e6 means 30 seconds
+int deepSleepTime = 120e6; //Variable to determine how long to sleep for: 120e6 means 120 seconds or 2 mins. Should give battery life of 10 days
 int prevRainValue = 0; //Variable to store and check a prior raining value
 uint16_t sensorValues[5]; //Array to store all sensor readings
 
@@ -132,17 +132,18 @@ void readSensors(uint16_t sensorValues[]){
     delay(100);
 
     //Checks if it's pin 4 and sees if it's raining fast or not.
-    if(i==4){
-      if( (prevRainValue-sensorValues[i]) < rainingFast){
-        isRaining = false;
-        deepSleepTime = 3000e6;
-      }
-      else((prevRainValue-sensorValues[i]) > rainingFast){
-        isRaining = true;
-        deepSleepTime = 15e6;
-      }
-      prevRainValue = sensorValues[i]
-    }
+    // NOTE: RESTORE THIS ONCE WE MOVE BACK TO VARIABLE COLLECTION
+    // if(i==4){
+    //   if( (prevRainValue-sensorValues[i]) < rainingFast){
+    //     isRaining = false;
+    //     deepSleepTime = 3000e6;
+    //   }
+    //   else((prevRainValue-sensorValues[i]) > rainingFast){
+    //     isRaining = true;
+    //     deepSleepTime = 15e6;
+    //   }
+    //   prevRainValue = sensorValues[i]
+    // }
   }
 }
 
@@ -278,7 +279,7 @@ void initializeSD(){
     delay(5000); //Was told it needs 5-10 sec to connect
     if (i == 5){
       Serial.print("Initialization failed!");
-      ESP.deepSleep(3600e6); //Sleep if we failed to initialize
+      ESP.deepSleep(deepSleepTime); //Sleep if we failed to initialize
     }
   }
 }
@@ -304,6 +305,7 @@ uint16_t combineBytes(uint8_t[] bytes){
   memcpy(twoBytes, &bytes, 2);
   return twoBytes;
 }
+
 
 
 
