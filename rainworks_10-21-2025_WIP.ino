@@ -23,7 +23,7 @@ SPISettings adcSettings(100000, MSBFIRST, SPI_MODE0);
 //Extra needed variables
 bool isRaining = false; //Check if raining or not
 int rainingFast = 20; //Value if it's raining fast. Can figure out later
-int deepSleepTime = 30e6; //Variable to determine how long to sleep for
+int deepSleepTime = 30e6; //Variable to determine how long to sleep for: 30e6 means 30 seconds
 int prevRainValue = 0; //Variable to store and check a prior raining value
 uint16_t sensorValues[5]; //Array to store all sensor readings
 
@@ -304,5 +304,6 @@ uint16_t combineBytes(uint8_t[] bytes){
   memcpy(twoBytes, &bytes, 2);
   return twoBytes;
 }
+
 
 
