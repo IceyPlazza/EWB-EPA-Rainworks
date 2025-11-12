@@ -34,6 +34,7 @@ precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
 postcondition - files read are deleted upon completion
 
 @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
+TODO: REPLACE @param dataArray and use an ArrayList!
 */
 // Opens SD card to read a file into in 2 bytes
 // @param dataArray: the array holding the data to read
