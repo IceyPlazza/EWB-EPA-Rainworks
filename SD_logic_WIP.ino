@@ -38,6 +38,8 @@ TODO: REPLACE @param dataArray and use an ArrayList!
 */
 // Opens SD card to read a file into in 2 bytes
 // @param dataArray: the array holding the data to read
+
+//TODO: NEED TO CHANGE THIS TO RETURN AN ARRAY LIST
 uint16_t[] readAllFromSD(uint16_t[] dataArray){
   initializeSD();
 
