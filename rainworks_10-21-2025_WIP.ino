@@ -242,8 +242,6 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
   writeMain -- function to determine whether to write directly to ThingSpeak or to SD card
   //TODO: ADD TO THIS; DONT HESITATE TO EDIT OR CHANGE LOGIC IF YOU DISCOVER SOMETHING BETTER
 */
-int numFilesInSD = 0; // Temporary int for checking how many files in SD to read until the check-if-file-exists
-                              // implemented in the read sd card method
 
 void writeMain(bool connectedWifi){
 	if (!initializeSD()){
@@ -260,7 +258,7 @@ void writeMain(bool connectedWifi){
 		//			sensorValues[dataSlot] = allData.get(i);
 		//	 		if (dataSlot == 0 && i!=0){
 		// 			writeToThingSpeak(sensorValues);
-		//				delay(100); // wait one second for ThingSpeak cooldown
+		//				delay(1000); // wait one second for ThingSpeak cooldown
 		//	 		}
 		// }
 		readSensors(sensorValues);
@@ -281,13 +279,11 @@ void writeMain(bool connectedWifi){
 
 /*
 initializeSD - a void helper method to initialize the SD card. 
-Will sleep and prematurely stop the program if SD card cannot be initialized.
 */
 bool initializeSD(){
-  //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
   Serial.print("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
-    int success = SD.begin(); 
+    int success = SD.begin(); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
     Serial.print("Initializing attempt: " + String(i));
     if (success == 1){
       Serial.print("SD Card Initialized!");
