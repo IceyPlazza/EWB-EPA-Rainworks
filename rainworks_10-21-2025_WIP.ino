@@ -38,7 +38,7 @@ void setup() {
   //Series of actions to take before we deepSleep.
   Serial.println("\nStarting up...");
   WiFi.mode(WIFI_STA);
-  connectWifi();
+  bool connected = connectWifi();
   ThingSpeak.begin(client);
   writeMain();
 
@@ -88,7 +88,7 @@ uint16_t readFromADC(uint8_t channel) {
 /*
   connectWifi -- function to establish a Wifi connection
 */
-void connectWifi(){
+bool connectWifi(){
 
   //Having this here just for in case a different non-registered board was used.
   Serial.println();
@@ -107,13 +107,14 @@ void connectWifi(){
         delay(10000); //Was told it needs 5-10 sec to connect
       } else {
         Serial.println("\nConnected.");
-        break;
+        return true;
       }
     } 
 
     //NOTE: If no wifi, we should write to SD card
     if (WiFi.status() != WL_CONNECTED){
       Serial.println("Wifi unavailable.");
+			return false;
     }
   }
 }
