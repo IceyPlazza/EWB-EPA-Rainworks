@@ -3,6 +3,7 @@
 #include "SPI.h"
 #include <ESP8266WiFi.h>
 #include <SD.h>
+// need to implement ArrayList library
 
 //ThinkSpeak API
 unsigned long myChannelNumber = 2637657;
@@ -245,18 +246,33 @@ int numFilesInSD = 0; // Temporary int for checking how many files in SD to read
                               // implemented in the read sd card method
 
 void writeMain(bool connectedWifi){
+	if (!initializeSD()){
+		Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
+  		ESP.deepSleep(deepSleepTime);
+	}
+	
   //First, check if we have wifi.
   if (connectedWifi) {
 		ThingSpeak.begin(client); 
+		// ArrayList allData = readAllFromSD(); //If list is empty, for loop is no-op
+		// for (size_t i = 0; i < ArrayList.length(); ++i){
+		// 		size_t dataSlot = i%5;
+		//			sensorValues[dataSlot] = allData.get(i);
+		//	 		if (dataSlot == 0 && i!=0){
+		// 			writeToThingSpeak(sensorValues);
+		//				delay(100); // wait one second for ThingSpeak cooldown
+		//	 		}
+		// }
+		readSensors(sensorValues);
+		writeToThingSpeak(sensorValues);
+		//done
     //If we have wifi, check if we have files in SD to read and send
-    for (int i = numFilesInSD; i > 0; ++i) { // Temporary int placeholder to see if files exist
-      writeToThingSpeak(readFromSD(5)); // Looks like the readFromSD reads multiple files? Not sure how that would work
-      delay(120); // 2 min delay
-    }
+  } else {
+		readSensors(sensorValues);
+		writeToSD(sensorValues);
+	}
 
     // Read and send form sensors
-   
-  }
     //Send our new readings
   //If we do not have wifi
     //Read from sensors
@@ -267,7 +283,7 @@ void writeMain(bool connectedWifi){
 initializeSD - a void helper method to initialize the SD card. 
 Will sleep and prematurely stop the program if SD card cannot be initialized.
 */
-void initializeSD(){
+bool initializeSD(){
   //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
   Serial.print("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
@@ -275,13 +291,12 @@ void initializeSD(){
     Serial.print("Initializing attempt: " + String(i));
     if (success == 1){
       Serial.print("SD Card Initialized!");
-      return;
+      return true;
     }
     delay(5000); //Was told it needs 5-10 sec to connect
     if (i == 5){
       Serial.print("Initialization failed!");
-			Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
-      ESP.deepSleep(deepSleepTime); //Sleep if we failed to initialize
+			return false;
     }
   }
 }
