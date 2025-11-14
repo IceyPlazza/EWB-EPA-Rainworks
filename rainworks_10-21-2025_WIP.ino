@@ -39,7 +39,6 @@ void setup() {
   Serial.println("\nStarting up...");
   WiFi.mode(WIFI_STA);
   bool connected = connectWifi();
-  ThingSpeak.begin(client);
   writeMain(connected);
 
   //Let's wait an extra tenth of a second just in case there's any delays we might have to deal with
@@ -248,6 +247,7 @@ int numFilesInSD = 0; // Temporary int for checking how many files in SD to read
 void writeMain(bool connectedWifi){
   //First, check if we have wifi.
   if (connectedWifi) {
+		ThingSpeak.begin(client); 
     //If we have wifi, check if we have files in SD to read and send
     for (int i = numFilesInSD; i > 0; ++i) { // Temporary int placeholder to see if files exist
       writeToThingSpeak(readFromSD(5)); // Looks like the readFromSD reads multiple files? Not sure how that would work
@@ -280,6 +280,7 @@ void initializeSD(){
     delay(5000); //Was told it needs 5-10 sec to connect
     if (i == 5){
       Serial.print("Initialization failed!");
+			Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
       ESP.deepSleep(deepSleepTime); //Sleep if we failed to initialize
     }
   }
