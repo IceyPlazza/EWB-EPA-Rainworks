@@ -40,7 +40,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   bool connected = connectWifi();
   ThingSpeak.begin(client);
-  writeMain();
+  writeMain(connected);
 
   //Let's wait an extra tenth of a second just in case there's any delays we might have to deal with
   Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
@@ -245,9 +245,9 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
 int numFilesInSD = 0; // Temporary int for checking how many files in SD to read until the check-if-file-exists
                               // implemented in the read sd card method
 
-void writeMain(){
+void writeMain(bool connectedWifi){
   //First, check if we have wifi.
-  if (checkWifiStatus()) {
+  if (connectedWifi) {
     //If we have wifi, check if we have files in SD to read and send
     for (int i = numFilesInSD; i > 0; ++i) { // Temporary int placeholder to see if files exist
       writeToThingSpeak(readFromSD(5)); // Looks like the readFromSD reads multiple files? Not sure how that would work
