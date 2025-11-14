@@ -72,7 +72,6 @@ uint16_t[] readFromSD(uint16_t[] dataArray, fileNum){
       dataFields[i] = combineBytes(bytes);
     }
   }
-  myFile.close();
 
   return dataArray;
 }
