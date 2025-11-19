@@ -3,7 +3,7 @@
 #include "SPI.h"
 #include <ESP8266WiFi.h>
 #include <SD.h>
-// need to implement ArrayList library
+#include <ArrayList.h>
 
 //ThinkSpeak API
 unsigned long myChannelNumber = 2637657;
@@ -26,7 +26,6 @@ bool isRaining = false; //Check if raining or not
 int rainingFast = 20; //Value if it's raining fast. Can figure out later
 int deepSleepTime = 120e6; //Variable to determine how long to sleep for: 120e6 means 120 seconds or 2 mins. Should give battery life of 10 days
 int prevRainValue = 0; //Variable to store and check a prior raining value
-uint16_t sensorValues[5]; //Array to store all sensor readings
 
 void setup() {
 
@@ -110,20 +109,19 @@ bool connectWifi(){
         return true;
       }
     } 
-
-    //NOTE: If no wifi, we should write to SD card
-    if (WiFi.status() != WL_CONNECTED){
-      Serial.println("Wifi unavailable.");
-			return false;
-    }
   }
+    Serial.println("Wifi unavailable.");
+		return false;
 }
 
 /*
   readSensors -- helper method to read and store all sensor values into an array
   @param sensorValues -- A uint16_t array with 5 array slots (as we have 5 sensors)
 */
-void readSensors(uint16_t sensorValues[]){
+uint16_t* readSensors(){
+
+  uint16_t sensorValues[5];
+
   // Runs 5 times to set each of the 5 field values
   // ADC channels are zero based indexing
   for (size_t i = 0; i < 5; ++i) {
@@ -146,13 +144,15 @@ void readSensors(uint16_t sensorValues[]){
     //   prevRainValue = sensorValues[i]
     // }
   }
+
+  return sensorValues;
 }
 
 /*
   writeToThingSpeak -- function to send all data in an array to ThingSpeak
   @param dataArray -- A uint16_t array with 5 array slots (as we have 5 sensors)
 */
-void writeToThingSpeak(uint16_t dataArray[]){
+void writeToThingSpeak(uint16_t* dataArray){
   
   for (size_t i = 0; i < 5; ++i){
     ThingSpeak.setField(i+1, dataArray[i]); //ThingSpeak is 1-based indexing
@@ -182,8 +182,8 @@ postcondition - a new file is created containing 10 bytes, as 5 sensors need 2 b
 
 @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
 */
-void writeToSD(uint16_t[] dataArray){
-  initializeSD()//Initializes the SD card
+void writeToSD(uint16_t dataArray[]){
+  initializeSD();//Initializes the SD card
 
   File myFile = SD.open("/"); //Opens root directory; assuming SD card only has root dir
 
@@ -197,7 +197,7 @@ void writeToSD(uint16_t[] dataArray){
 
   //Write data to file in terms of bytes
   for (size_t i = 0; i < 5; i++){
-    uint8_t split[2] = splitBytes(dataArray[i]);
+    uint8_t* split = splitBytes(dataArray[i]);
     myFile.write(split, 2);
   }
 
@@ -205,13 +205,17 @@ void writeToSD(uint16_t[] dataArray){
 }
 
 /*
-readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
-precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
+readAllFromSD - Opens SD card to read all files stored on the SD card
 postcondition - files read are deleted upon completion
 
-@param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
+@return dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
+holding the data we read. If SD card has no files to read, we return an empty ArrayList
 */
-uint16_t[] readFromSD(uint16_t[] dataArray){
+
+ArrayList<uint16_t> readAllFromSD(){
+
+  ArrayList<uint16_t> dataList(ArrayList<uint16_t>::DYNAMIC2, 5);
+
   initializeSD();
 
   File myFile = SD.open("/");
@@ -219,22 +223,45 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
   //Based on our naming scheme, here is how we will be tracking existing files.
   //Assume that Wifi will last long enough to transmit all data and delete all files.
   size_t fileNum = 0;
-  while(SD.exists("data" + String(fileNum) + ".txt")){
-    myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
-    //TODO: add logic to read and combine bytes
-    for (int i = 0, i < 5, i++) {
-      if (myFile.available()) {
-        uint8_t bytes[2];
-        uint8_t bytes[0] = myFile.read();
-        uint8_t bytes[1] = myFile.read();
 
-        dataFields[i] = combineBytes(bytes);
-      }
+  while(SD.exists("data" + String(fileNum) + ".txt")){
+    uint16_t* result = readFromSD(fileNum);
+
+    for (size_t i = 0; i < 5; ++i){
+      dataList.add(result[i]);
     }
-    myFile.close();
+
     SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
     ++fileNum;
   }
+
+  myFile.close();
+
+  return dataList;
+}
+
+/*
+readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
+precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
+
+@return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
+*/
+uint16_t* readFromSD(size_t fileNum){
+  uint16_t dataArray[5];
+  
+  //Read one file at a time
+  myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
+  //TODO: add logic to read and combine bytes
+  for (int i = 0; i < 5; i++) {
+    if (myFile.available()) {
+      uint8_t bytes[2];
+      bytes[0] = myFile.read();
+      bytes[1] = myFile.read();
+
+      dataArray[i] = combineBytes(bytes);
+    }
+  }
+
   return dataArray;
 }
 
@@ -244,37 +271,36 @@ uint16_t[] readFromSD(uint16_t[] dataArray){
 */
 
 void writeMain(bool connectedWifi){
+
+  uint16_t* sensorValues; //Array to store all sensor readings
+
 	if (!initializeSD()){
 		Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
-  		ESP.deepSleep(deepSleepTime);
+  	ESP.deepSleep(deepSleepTime);
 	}
 	
   //First, check if we have wifi.
   if (connectedWifi) {
 		ThingSpeak.begin(client); 
-		// ArrayList allData = readAllFromSD(); //If list is empty, for loop is no-op
-		// for (size_t i = 0; i < ArrayList.length(); ++i){
-		// 		size_t dataSlot = i%5;
-		//			sensorValues[dataSlot] = allData.get(i);
-		//	 		if (dataSlot == 0 && i!=0){
-		// 			writeToThingSpeak(sensorValues);
-		//				delay(1000); // wait one second for ThingSpeak cooldown
-		//	 		}
-		// }
-		readSensors(sensorValues);
+		ArrayList<uint16_t> allData = readAllFromSD(); 
+
+    //If list is empty, for loop is no-op
+		for (size_t i = 0; i < allData.size(); ++i){
+			size_t dataSlot = i%5;
+			sensorValues[dataSlot] = allData.get(i);
+			if (dataSlot == 0 && i!=0){
+				writeToThingSpeak(sensorValues);
+				delay(1000); // wait one second for ThingSpeak cooldown
+			}
+		}
+    
+		sensorValues = readSensors();
 		writeToThingSpeak(sensorValues);
-		//done
-    //If we have wifi, check if we have files in SD to read and send
-  } else {
-		readSensors(sensorValues);
+
+  } else { // Don't have wifi, so let's just read and write to SD.
+		sensorValues = readSensors();
 		writeToSD(sensorValues);
 	}
-
-    // Read and send form sensors
-    //Send our new readings
-  //If we do not have wifi
-    //Read from sensors
-    //Write to SD card
 }
 
 /*
@@ -290,11 +316,12 @@ bool initializeSD(){
       return true;
     }
     delay(5000); //Was told it needs 5-10 sec to connect
-    if (i == 5){
-      Serial.print("Initialization failed!");
-			return false;
-    }
+    
   }
+
+  Serial.print("Initialization failed!");
+	return false;
+    
 }
 
 /*
@@ -302,9 +329,9 @@ splitBytes - a helper method that takes a uint16_t value and split it into two s
 @param twoBytes - a uint16_t value
 @return - a uint8_t array with two elements. Each element is a separate byte of data.
 */
-uint8_t[] splitBytes(uint16_t twoBytes){
+uint8_t* splitBytes(uint16_t twoBytes){
   uint8_t bytes[2];
-  memcpy(bytes, &twoBytes, 2);
+  memcpy(&bytes, &twoBytes, 2);
   return bytes;
 }
 
@@ -313,9 +340,9 @@ combineBytes - a helper method that takes an array of 2 bytes and merge them tog
 @param bytes - a uint8_t array of size 2
 @return - a uint16_t value that's the result of merging the bytes in our parameter
 */
-uint16_t combineBytes(uint8_t[] bytes){
+uint16_t combineBytes(uint8_t bytes[]){
   uint16_t twoBytes;
-  memcpy(twoBytes, &bytes, 2);
+  memcpy(&twoBytes, &bytes, 2);
   return twoBytes;
 }
 
