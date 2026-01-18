@@ -8,6 +8,9 @@
 <h1>For Returning Members:</h1>
 
 - Glad to have you back! New tasks will be assigned to you every meeting depending on number of members in attendance and project progress
+- Instructions to debug the Arduino can be found in arduino_debug.md
+- Thingspeak overview for data collection can be found in thingspeak_data_collection.md
+- Additional helpful resources in resources.md
 
 <h1>Contact me if you have any questions! (Or send me code):</h1>
 
