@@ -3,7 +3,7 @@
 - https://thingspeak.com/
 
 
-</h1> Repo containing examples with ESP8266 sending data to a Thingspeak channel: </h1>
+# Repo containing examples with ESP8266 sending data to a Thingspeak channel:
 
 - https://github.com/nothans/thingspeak-esp-examples 
 
