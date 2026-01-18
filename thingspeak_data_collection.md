@@ -18,13 +18,9 @@
 
 - Turbidity 
 
-- Total Dissolved Solids 
-
 - Soil Moisture 
 
 - Conductivity 
-
-- Microplastics 
 
 <h1> Plan: </h1>
 
