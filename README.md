@@ -10,4 +10,5 @@
 - Glad to have you back! New tasks will be assigned to you every meeting depending on number of members in attendance and project progress
 
 <h1>Contact me if you have any questions! (Or send me code):</h1>
-iven.chen@vanderbilt.edu
+
+- iven.chen@vanderbilt.edu
