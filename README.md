@@ -6,6 +6,7 @@
 - Please browse through the .ino files in both our main branch and WIP branch; documentation should help make understanding the code intuitive
 
 <h1>For Returning Members:</h1>
+
 - Glad to have you back! New tasks will be assigned to you every meeting depending on number of members in attendance and project progress
 
 <h1>Contact me if you have any questions! (Or send me code):</h1>
