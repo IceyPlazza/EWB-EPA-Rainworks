@@ -4,7 +4,7 @@
 
 - Arduino Board: https://www.sparkfun.com/products/13231 
 
-Please familarize yourself with the basic information in the two links.
+Please familiarize yourself with the basic information in the two links.
 Breadboards and other components can be used to prototype our design and test the code 
 
 <h1> HELPFUL PROGRAMMING RESOURCES </h1>
