@@ -1,43 +1,17 @@
-Steps to Upload Code to Board for the First Time 
+<h1> For Visitors / New Members: </h1>
 
-1. Use Arduino IDE, not web browser 
+- Please browse through the key presentations folder to familiarize yourself with the general goal of Rainworks!
+- Having some background in Java or C++ would assist you immensely if you're joining the CS Team.
+- main branch is our last working version, main_revamp_WIP branch is our experimental/work-in-progress branch
+- Please browse through the .ino files in both our main branch and WIP branch; documentation should help make understanding the code intuitive
 
-2. Enter Arduino IDE 
+<h1>For Returning Members:</h1>
 
-3. Go to File -> Preferences -> Additional board manager URLs and paste the following 
+- Glad to have you back! New tasks will be assigned to you every meeting depending on number of members in attendance and project progress
+- Instructions to debug the Arduino can be found in arduino_debug.md
+- Thingspeak overview for data collection can be found in thingspeak_data_collection.md
+- Additional helpful resources in resources.md
 
-4. http://arduino.esp8266.com/stable/package_esp8266com_index.json 
+<h1>Contact me if you have any questions! (Or send me code):</h1>
 
-5. Go to Sketch -> Include Library -> Manage Libraries and add the Thingspeak library 
-
-Note: The SPI and Wifi libraries should have been added already from Step 3 
-
-- Register device with Vanderbilt in order to connect to Wifi 
-
-- This requires running a script to find the MAC address of the Thing Dev (Should print on Serial Monitor) 
-
-- Use this link: https://wifi.vanderbilt.edu/vunetid.html  
-
-- Connect the Thing Dev to the computer using the USB connector 
-
-- Ensure that the channel number and write API key are correct 
-
- 
-
-Steps to Read Board’s Serial Messages 
-
-1. Go to Tools -> Serial Monitor 
-
-2. In the monitor, navigate to where it has a value and “baud” 
-
-3. Set the baud value to the same as the declared value in Serial.begin(value); 
-
-4. Last we checked, it was set to 115200 
-
-5. Ensure that the COM port is set correctly and labeled as “SparkFun ESP8266 Thing Dev” 
-
-6. Start the board.  
-
-If nothing is showing up in the Serial Monitor, turn the board on and off again. 
-
-Alternatively, switch COM ports then switch back to the correct COM port. 
+- iven.chen@vanderbilt.edu
