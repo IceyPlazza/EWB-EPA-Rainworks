@@ -26,6 +26,7 @@ bool isRaining = false; //Check if raining or not
 int rainingFast = 20; //Value if it's raining fast. Can figure out later
 int deepSleepTime = 120e6; //Variable to determine how long to sleep for: 120e6 means 120 seconds or 2 mins. Should give battery life of 10 days
 int prevRainValue = 0; //Variable to store and check a prior raining value
+ArrayList<uint16_t> dataList(ArrayList<uint16_t>::DYNAMIC2, 5); //Buffers all of data from SD card when needed
 
 void setup() {
 
@@ -212,9 +213,7 @@ postcondition - files read are deleted upon completion
 holding the data we read. If SD card has no files to read, we return an empty ArrayList
 */
 
-ArrayList<uint16_t> readAllFromSD(){
-
-  ArrayList<uint16_t> dataList(ArrayList<uint16_t>::DYNAMIC2, 5);
+void readAllFromSD(ArrayList<uint16_t> &dataList){
 
   initializeSD();
 
@@ -237,7 +236,6 @@ ArrayList<uint16_t> readAllFromSD(){
 
   myFile.close();
 
-  return dataList;
 }
 
 /*
@@ -282,12 +280,12 @@ void writeMain(bool connectedWifi){
   //First, check if we have wifi.
   if (connectedWifi) {
 		ThingSpeak.begin(client); 
-		ArrayList<uint16_t> allData = readAllFromSD(); 
+		readAllFromSD(dataList); 
 
     //If list is empty, for loop is no-op
-		for (size_t i = 0; i < allData.size(); ++i){
+		for (size_t i = 0; i < dataList.size(); ++i){
 			size_t dataSlot = i%5;
-			sensorValues[dataSlot] = allData.get(i);
+			sensorValues[dataSlot] = dataList.get(i);
 			if (dataSlot == 0 && i!=0){
 				writeToThingSpeak(sensorValues);
 				delay(1000); // wait one second for ThingSpeak cooldown
@@ -309,7 +307,7 @@ initializeSD - a void helper method to initialize the SD card.
 bool initializeSD(){
   Serial.print("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
-    int success = SD.begin(); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
+    int success = SD.begin(4); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
     Serial.print("Initializing attempt: " + String(i));
     if (success == 1){
       Serial.print("SD Card Initialized!");
