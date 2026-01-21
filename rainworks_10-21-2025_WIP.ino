@@ -2,7 +2,7 @@
 #include "ThingSpeak.h"
 #include "SPI.h"
 #include <ESP8266WiFi.h>
-#include <SD.h>
+#include "SD.h"
 #include <ArrayList.h>
 
 //ThinkSpeak API
@@ -250,7 +250,7 @@ uint16_t* readFromSD(size_t fileNum){
   uint16_t dataArray[5];
   
   //Read one file at a time
-  myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
+  File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
   //TODO: add logic to read and combine bytes
   for (int i = 0; i < 5; i++) {
     if (myFile.available()) {
