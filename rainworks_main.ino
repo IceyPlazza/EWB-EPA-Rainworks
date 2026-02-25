@@ -322,18 +322,16 @@ bool initializeSD(){
     
 }
 
-/*
+/**
 splitBytes - a helper method that takes a uint16_t value and split it into two seperate bytes
 @param twoBytes - a uint16_t value
-@return - a uint8_t array with two elements. Each element is a separate byte of data.
+@param *bytes - a pointer looking at an array of two uint8_t bytes
 */
-uint8_t* splitBytes(uint16_t twoBytes){
-  uint8_t bytes[2];
-  memcpy(bytes, &twoBytes, 2);
-  return bytes;
+void splitBytes(uint16_t twoBytes, uint8_t *bytes){
+    memcpy(bytes, &twoBytes, 2);
 }
 
-/*
+/**
 combineBytes - a helper method that takes an array of 2 bytes and merge them together in a new data type.
 @param bytes - a uint8_t array of size 2
 @return - a uint16_t value that's the result of merging the bytes in our parameter
