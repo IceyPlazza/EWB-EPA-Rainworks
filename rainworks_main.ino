@@ -329,7 +329,7 @@ splitBytes - a helper method that takes a uint16_t value and split it into two s
 */
 uint8_t* splitBytes(uint16_t twoBytes){
   uint8_t bytes[2];
-  memcpy(&bytes, &twoBytes, 2);
+  memcpy(bytes, &twoBytes, 2);
   return bytes;
 }
 
@@ -340,7 +340,7 @@ combineBytes - a helper method that takes an array of 2 bytes and merge them tog
 */
 uint16_t combineBytes(uint8_t bytes[]){
   uint16_t twoBytes;
-  memcpy(&twoBytes, &bytes, 2);
+  memcpy(&twoBytes, bytes, 2);
   return twoBytes;
 }
 
