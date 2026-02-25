@@ -57,7 +57,7 @@ void loop() {
 ///////////////////////////////////////////////
 */
 
-/*
+/**
   readFromADC -- function to help read data from each respective sensor connected to the respective channels
   @param channel - the channel to which the sensor should be attached
   @return - the reading from the sensor
@@ -85,8 +85,9 @@ uint16_t readFromADC(uint8_t channel) {
     return adcValue;
 }
 
-/*
+/**
   connectWifi -- function to establish a Wifi connection
+  @return -- True if successfully connected to Wifi, false otherwise
 */
 bool connectWifi(){
 
@@ -115,9 +116,10 @@ bool connectWifi(){
 		return false;
 }
 
-/*
+/**
   readSensors -- helper method to read and store all sensor values into an array
   @param sensorValues -- A uint16_t array with 5 array slots (as we have 5 sensors)
+  @return -- a pointer representation of an array of sensor values
 */
 uint16_t* readSensors(){
 
@@ -149,7 +151,7 @@ uint16_t* readSensors(){
   return sensorValues;
 }
 
-/*
+/**
   writeToThingSpeak -- function to send all data in an array to ThingSpeak
   @param dataArray -- A uint16_t array with 5 array slots (as we have 5 sensors)
 */
@@ -164,7 +166,7 @@ void writeToThingSpeak(uint16_t* dataArray){
 
   //HTTP Code 200 means success, anything else means there was an error of some sort.
   if (httpCode == 200) {
-    Serial.print("\nWriting to Channel 1 Field:\n");
+    Serial.println("\nWriting to Channel 1 Field:\n");
     for (size_t i = 0; i < 5; i++){
       Serial.print(i+1);
       Serial.print(" with value ");
@@ -177,11 +179,11 @@ void writeToThingSpeak(uint16_t* dataArray){
   }
 }
 
-/*
-writeToSD - Opens SD card and creates a file to write data in series of 2 bytes for 10 bytes total
-postcondition - a new file is created containing 10 bytes, as 5 sensors need 2 bytes each
+/**
+  writeToSD - Opens SD card and creates a file to write data in series of 2 bytes for 10 bytes total
+  postcondition - a new file is created containing 10 bytes, as 5 sensors need 2 bytes each
 
-@param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
+  @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
 */
 void writeToSD(uint16_t dataArray[]){
   initializeSD();//Initializes the SD card
@@ -206,12 +208,12 @@ void writeToSD(uint16_t dataArray[]){
   myFile.close(); //Must close file when we are done to save changes.
 }
 
-/*
-readAllFromSD - Opens SD card to read all files stored on the SD card
-postcondition - files read are deleted upon completion
+/**
+  readAllFromSD - Opens SD card to read all files stored on the SD card
+  postcondition - files read are deleted upon completion
 
-@return dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
-holding the data we read. If SD card has no files to read, we return an empty ArrayList
+  @return dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
+  holding the data we read. If SD card has no files to read, we return an empty ArrayList
 */
 
 void readAllFromSD(ArrayList<uint16_t> &dataList){
@@ -239,11 +241,11 @@ void readAllFromSD(ArrayList<uint16_t> &dataList){
 
 }
 
-/*
-readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
-precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
+/**
+  readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
+  precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
 
-@return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
+  @return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
 */
 uint16_t* readFromSD(size_t fileNum){
   uint16_t dataArray[5];
@@ -264,7 +266,7 @@ uint16_t* readFromSD(size_t fileNum){
   return dataArray;
 }
 
-/*
+/**
   writeMain -- function to determine whether to write directly to ThingSpeak or to SD card
   //TODO: ADD TO THIS; DONT HESITATE TO EDIT OR CHANGE LOGIC IF YOU DISCOVER SOMETHING BETTER
 */
@@ -302,23 +304,24 @@ void writeMain(bool connectedWifi){
 	}
 }
 
-/*
-initializeSD - a void helper method to initialize the SD card. 
+/**
+  initializeSD - a void helper method to initialize the SD card.
+  @return -- True if SD card successfully initialized, false otherwise. 
 */
 bool initializeSD(){
-  Serial.print("Initializing SD Card...");
+  Serial.println("Initializing SD Card...");
   for (size_t i = 1; i <= 5; i++){
     int success = SD.begin(4); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
-    Serial.print("Initializing attempt: " + String(i));
+    Serial.println("Initializing attempt: " + String(i));
     if (success == 1){
-      Serial.print("SD Card Initialized!");
+      Serial.println("SD Card Initialized!");
       return true;
     }
     delay(5000); //Was told it needs 5-10 sec to connect
     
   }
 
-  Serial.print("Initialization failed!");
+  Serial.println("Initialization failed!");
 	return false;
     
 }
@@ -342,7 +345,3 @@ uint16_t combineBytes(uint8_t bytes[]){
   memcpy(&twoBytes, bytes, 2);
   return twoBytes;
 }
-
-
-
-
