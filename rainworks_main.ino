@@ -266,6 +266,7 @@ void writeMain(bool connectedWifi){
 	if (!initializeSD()){
 		Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
   	ESP.deepSleep(deepSleepTime);
+    return;
 	}
 	
   //First, check if we have wifi.
@@ -281,7 +282,7 @@ void writeMain(bool connectedWifi){
       // Batch is ready to send once dataSlot == 4
 			if (dataSlot == 4){
 				writeToThingSpeak(sensorValues);
-				delay(1000); // wait one second for ThingSpeak cooldown
+				delay(15000); // ThingSpeak 15 sec rate limit
 			}
 		}
     
@@ -335,3 +336,7 @@ uint16_t combineBytes(uint8_t bytes[]){
   memcpy(&twoBytes, bytes, 2);
   return twoBytes;
 }
+
+
+
+
