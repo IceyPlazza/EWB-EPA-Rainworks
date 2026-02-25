@@ -198,7 +198,8 @@ void writeToSD(uint16_t dataArray[]){
 
   //Write data to file in terms of bytes
   for (size_t i = 0; i < 5; i++){
-    uint8_t* split = splitBytes(dataArray[i]);
+	uint8_t split[2];
+    splitBytes(dataArray[i], split);
     myFile.write(split, 2);
   }
 
