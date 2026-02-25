@@ -117,13 +117,10 @@ bool connectWifi(){
 }
 
 /**
-  readSensors -- helper method to read and store all sensor values into an array
-  @param sensorValues -- A uint16_t array with 5 array slots (as we have 5 sensors)
-  @return -- a pointer representation of an array of sensor values
+  readSensors -- helper method to read and store all sensor values into an array. 
+  @param sensorValues -- A uint16_t array with 5 array slots (as we have 5 sensors) Data is moved into this array
 */
-uint16_t* readSensors(){
-
-  uint16_t sensorValues[5];
+void readSensors(uint16_t* sensorValues){
 
   // Runs 5 times to set each of the 5 field values
   // ADC channels are zero based indexing
@@ -147,8 +144,6 @@ uint16_t* readSensors(){
     //   prevRainValue = sensorValues[i]
     // }
   }
-
-  return sensorValues;
 }
 
 /**
@@ -188,15 +183,13 @@ void writeToThingSpeak(uint16_t* dataArray){
 void writeToSD(uint16_t dataArray[]){
   initializeSD();//Initializes the SD card
 
-  File myFile = SD.open("/"); //Opens root directory; assuming SD card only has root dir
-
   //Creating a file to write to
   //Logic to correctly identify different files and available filenames
   size_t fileNum = 0;
   while(SD.exists("data" + String(fileNum) + ".txt")){
     ++fileNum;
   }
-  myFile = SD.open("data" + String(fileNum) + ".txt", FILE_WRITE);
+  File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_WRITE);
 
   //Write data to file in terms of bytes
   for (size_t i = 0; i < 5; i++){
@@ -220,25 +213,21 @@ void readAllFromSD(ArrayList<uint16_t> &dataList){
 
   initializeSD();
 
-  File myFile = SD.open("/");
-
   //Based on our naming scheme, here is how we will be tracking existing files.
   //Assume that Wifi will last long enough to transmit all data and delete all files.
   size_t fileNum = 0;
 
   while(SD.exists("data" + String(fileNum) + ".txt")){
-    uint16_t* result = readFromSD(fileNum);
+    uint16_t results[5];
+    readFromSD(fileNum, results);
 
     for (size_t i = 0; i < 5; ++i){
-      dataList.add(result[i]);
+      dataList.add(results[i]);
     }
 
     SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
     ++fileNum;
   }
-
-  myFile.close();
-
 }
 
 /**
@@ -247,8 +236,7 @@ void readAllFromSD(ArrayList<uint16_t> &dataList){
 
   @return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
 */
-uint16_t* readFromSD(size_t fileNum){
-  uint16_t dataArray[5];
+void readFromSD(size_t fileNum, uint16_t* dataArray){
   
   //Read one file at a time
   File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
@@ -263,7 +251,7 @@ uint16_t* readFromSD(size_t fileNum){
     }
   }
 
-  return dataArray;
+  myFile.close();
 }
 
 /**
@@ -273,7 +261,7 @@ uint16_t* readFromSD(size_t fileNum){
 
 void writeMain(bool connectedWifi){
 
-  uint16_t* sensorValues; //Array to store all sensor readings
+  uint16_t sensorValues[5]; //Array to store all sensor readings
 
 	if (!initializeSD()){
 		Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
@@ -289,17 +277,19 @@ void writeMain(bool connectedWifi){
 		for (size_t i = 0; i < dataList.size(); ++i){
 			size_t dataSlot = i%5;
 			sensorValues[dataSlot] = dataList.get(i);
-			if (dataSlot == 0 && i!=0){
+
+      // Batch is ready to send once dataSlot == 4
+			if (dataSlot == 4){
 				writeToThingSpeak(sensorValues);
 				delay(1000); // wait one second for ThingSpeak cooldown
 			}
 		}
     
-		sensorValues = readSensors();
+		readSensors(sensorValues);
 		writeToThingSpeak(sensorValues);
 
   } else { // Don't have wifi, so let's just read and write to SD.
-		sensorValues = readSensors();
+		readSensors(sensorValues);
 		writeToSD(sensorValues);
 	}
 }
@@ -327,18 +317,18 @@ bool initializeSD(){
 }
 
 /**
-splitBytes - a helper method that takes a uint16_t value and split it into two seperate bytes
-@param twoBytes - a uint16_t value
-@param *bytes - a pointer looking at an array of two uint8_t bytes
+  splitBytes - a helper method that takes a uint16_t value and split it into two seperate bytes
+  @param twoBytes - a uint16_t value
+  @param *bytes - a pointer looking at an array of two uint8_t bytes
 */
 void splitBytes(uint16_t twoBytes, uint8_t *bytes){
     memcpy(bytes, &twoBytes, 2);
 }
 
 /**
-combineBytes - a helper method that takes an array of 2 bytes and merge them together in a new data type.
-@param bytes - a uint8_t array of size 2
-@return - a uint16_t value that's the result of merging the bytes in our parameter
+  combineBytes - a helper method that takes an array of 2 bytes and merge them together in a new data type.
+  @param bytes - a uint8_t array of size 2
+  @return - a uint16_t value that's the result of merging the bytes in our parameter
 */
 uint16_t combineBytes(uint8_t bytes[]){
   uint16_t twoBytes;
