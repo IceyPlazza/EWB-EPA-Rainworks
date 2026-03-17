@@ -1,0 +1,133 @@
+#include "SD.h"
+
+const int chipSelect = 10; // Set the chip select pin for your SD card module
+uint16_t origArr[5] = {1, 2, 3, 4, 5};
+uint16_t newArr[5] = {0, 0, 0, 0, 0};
+
+// Use simulator from: https://wokwi.com/projects/360531831170769921
+// Paste code in to start playing around with simulator.
+
+void setup() {
+
+  Serial.begin(115200);
+
+for (int i = 0; i < 5; ++i){
+    Serial.print(String(origArr[i]));
+  }
+  Serial.println();
+
+  writeToSD(origArr);
+  readFromSD(0, newArr);
+
+  for (int i = 0; i < 5; ++i){
+    origArr[i] = origArr[i] * 2;
+    Serial.print(String(newArr[i]));
+  }
+  Serial.println();
+
+  writeToSD(origArr);
+  readFromSD(1, newArr);
+  
+  for (int i = 0; i < 5; ++i){
+    Serial.print(String(newArr[i]));
+  }
+}
+
+void loop() {
+
+}
+
+/**
+  splitBytes - a helper method that takes a uint16_t value and split it into two seperate bytes
+  @param twoBytes - a uint16_t value
+  @param *bytes - a pointer looking at an array of two uint8_t bytes
+*/
+void splitBytes(uint16_t twoBytes, uint8_t *bytes){
+    memcpy(bytes, &twoBytes, 2);
+}
+
+/**
+  combineBytes - a helper method that takes an array of 2 bytes and merge them together in a new data type.
+  @param bytes - a uint8_t array of size 2
+  @return - a uint16_t value that's the result of merging the bytes in our parameter
+*/
+uint16_t combineBytes(uint8_t bytes[]){
+  uint16_t twoBytes;
+  memcpy(&twoBytes, bytes, 2);
+  return twoBytes;
+}
+
+/**
+  initializeSD - a void helper method to initialize the SD card.
+  @return -- True if SD card successfully initialized, false otherwise. 
+*/
+bool initializeSD(){
+  Serial.println("Initializing SD Card...");
+  for (size_t i = 1; i <= 5; i++){
+    int success = SD.begin(10); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
+    Serial.println("Initializing attempt: " + String(i));
+    if (success == 1){
+      Serial.println("SD Card Initialized!");
+      return true;
+    }
+    delay(5000); //Was told it needs 5-10 sec to connect
+    
+  }
+
+  Serial.println("Initialization failed!");
+	return false;
+    
+}
+
+
+
+/**
+  readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
+  precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
+
+  @return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
+*/
+void readFromSD(size_t fileNum, uint16_t* dataArray){
+  
+  //Read one file at a time
+  File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
+  //TODO: add logic to read and combine bytes
+  for (int i = 0; i < 5; i++) {
+    if (myFile.available()) {
+      uint8_t bytes[2];
+      bytes[0] = myFile.read();
+      bytes[1] = myFile.read();
+
+      dataArray[i] = combineBytes(bytes);
+    }
+  }
+
+  myFile.close();
+}
+
+/**
+  writeToSD - Opens SD card and creates a file to write data in series of 2 bytes for 10 bytes total
+  postcondition - a new file is created containing 10 bytes, as 5 sensors need 2 bytes each
+
+  @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
+*/
+void writeToSD(uint16_t dataArray[]){
+  initializeSD();//Initializes the SD card
+
+  //Creating a file to write to
+  //Logic to correctly identify different files and available filenames
+  size_t fileNum = 0;
+  while(SD.exists("data" + String(fileNum) + ".txt")){
+    ++fileNum;
+  }
+  File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_WRITE);
+
+  //Write data to file in terms of bytes
+  for (size_t i = 0; i < 5; i++){
+	uint8_t split[2];
+    splitBytes(dataArray[i], split);
+    myFile.write(split, 2);
+  }
+
+  myFile.close(); //Must close file when we are done to save changes.
+}
