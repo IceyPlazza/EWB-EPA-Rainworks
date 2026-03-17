@@ -205,8 +205,9 @@ void writeToSD(uint16_t dataArray[]){
   readAllFromSD - Opens SD card to read all files stored on the SD card
   postcondition - files read are deleted upon completion
 
-  @return dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
-  holding the data we read. If SD card has no files to read, we return an empty ArrayList
+  @param dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
+  holding the data we read. This is also the same array list we return data in. 
+  If SD card has no files to read, we return an empty ArrayList
 */
 
 void readAllFromSD(ArrayList<uint16_t> &dataList){
@@ -234,7 +235,9 @@ void readAllFromSD(ArrayList<uint16_t> &dataList){
   readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
   precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
 
-  @return dataArray - an array of size 5 (due to 5 sensors) holding the data we read
+  @param fileNum - which file to read from
+  @param dataArray - an array of size 5 (due to 5 sensors) holding the data we read. 
+  We also return data using this same array
 */
 void readFromSD(size_t fileNum, uint16_t* dataArray){
   
