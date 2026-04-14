@@ -1,9 +1,8 @@
 //Libraries to use
 #include "ThingSpeak.h"
 #include "SPI.h"
-#include <ESP8266WiFi.h>
 #include "SD.h"
-#include <ArrayList.h>
+#include <ESP8266WiFi.h>
 
 //ThinkSpeak API
 unsigned long myChannelNumber = 2637657;
@@ -21,12 +20,11 @@ SPIClass mySPI;
 // Sets the speed of SPI data transmission (Hz), order of bits transmitted, and the mode which determines clock polarity and phase
 SPISettings adcSettings(100000, MSBFIRST, SPI_MODE0);
 
-//Extra needed variables
-bool isRaining = false; //Check if raining or not
-int rainingFast = 20; //Value if it's raining fast. Can figure out later
+//Extra needed variables. Uncomment variables when we swap implementations.
+// bool isRaining = false; //Check if raining or not
+// int rainingFast = 20; //Value if it's raining fast. Can figure out later
 int deepSleepTime = 120e6; //Variable to determine how long to sleep for: 120e6 means 120 seconds or 2 mins. Should give battery life of 10 days
-int prevRainValue = 0; //Variable to store and check a prior raining value
-ArrayList<uint16_t> dataList(ArrayList<uint16_t>::DYNAMIC2, 5); //Buffers all of data from SD card when needed
+// int prevRainValue = 0; //Variable to store and check a prior raining value
 
 void setup() {
 
@@ -34,7 +32,6 @@ void setup() {
   Serial.begin(115200);
   pinMode(ADC_CS_PIN, OUTPUT);
   mySPI.begin(); 
-  mySPI.beginTransaction(adcSettings);
 
   //Series of actions to take before we deepSleep.
   Serial.println("\nStarting up...");
@@ -43,7 +40,7 @@ void setup() {
   writeMain(connected);
 
   //Let's wait an extra tenth of a second just in case there's any delays we might have to deal with
-  Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
+  Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime/1000000) + " seconds.");
   ESP.deepSleep(deepSleepTime);
 }
 
@@ -149,9 +146,11 @@ void readSensors(uint16_t* sensorValues){
 /**
   writeToThingSpeak -- function to send all data in an array to ThingSpeak
   @param dataArray -- A uint16_t array with 5 array slots (as we have 5 sensors)
+  @return True if we successfully wrote, false otherwise
 */
-void writeToThingSpeak(uint16_t* dataArray){
+bool writeToThingSpeak(uint16_t* dataArray){
   
+  // Load ThingSpeak fields
   for (size_t i = 0; i < 5; ++i){
     ThingSpeak.setField(i+1, dataArray[i]); //ThingSpeak is 1-based indexing
   }
@@ -167,10 +166,13 @@ void writeToThingSpeak(uint16_t* dataArray){
       Serial.print(" with value ");
       Serial.println(dataArray[i]);
     }
+
+    return true;
   }
   else {
     Serial.println("\nProblem writing to Channel 1 Field ");
     Serial.println("HTTP error code " + String(httpCode));
+    return false;
   }
 }
 
@@ -181,7 +183,8 @@ void writeToThingSpeak(uint16_t* dataArray){
   @param dataArray - an array of size 5 (because we have 5 sensors) holding the data to write
 */
 void writeToSD(uint16_t dataArray[]){
-  initializeSD();//Initializes the SD card
+
+   initializeSD();
 
   //Creating a file to write to
   //Logic to correctly identify different files and available filenames
@@ -202,48 +205,82 @@ void writeToSD(uint16_t dataArray[]){
 }
 
 /**
-  readAllFromSD - Opens SD card to read all files stored on the SD card
-  postcondition - files read are deleted upon completion
-
-  @param dataList - an ArrayList of dynamic size (size is a multiple of 5 due to 5 sensors) 
-  holding the data we read. This is also the same array list we return data in. 
-  If SD card has no files to read, we return an empty ArrayList
+  readAllFromSD - Opens SD card to read all files stored on the SD card.
+  postcondition - files read are deleted upon completion. Prevents deletion if failed to read
 */
 
-void readAllFromSD(ArrayList<uint16_t> &dataList){
+void readAllFromSD(){
 
   initializeSD();
 
-  //Based on our naming scheme, here is how we will be tracking existing files.
-  //Assume that Wifi will last long enough to transmit all data and delete all files.
-  size_t fileNum = 0;
+  // Uses root dir to find files.
+  File root = SD.open("/");
 
-  while(SD.exists("data" + String(fileNum) + ".txt")){
-    uint16_t results[5];
-    readFromSD(fileNum, results);
+  if (!root){
+    Serial.println("Failed to open root directory.");
+    return;
+  }
 
-    for (size_t i = 0; i < 5; ++i){
-      dataList.add(results[i]);
+  File entry = root.openNextFile();
+
+  if (!entry){
+    Serial.println("No files on SD card.");
+    return;
+  }
+
+  //While we have files to read...
+  while(entry){
+
+    if (!entry.isDirectory()){
+
+      String fileName = entry.name();
+
+      // Upload relevant files.
+      if (fileName.startsWith("data") && fileName.endsWith(".txt")){
+        Serial.println("Found file: " + fileName);
+
+        uint16_t results[5];
+
+        readFromSD(fileName, results);
+
+        bool upload = writeToThingSpeak(results);
+
+        if (upload){
+          Serial.println("File uploaded. Deleting " + fileName);
+          SD.remove(fileName);
+          delay(15000);
+        } else {
+          Serial.println("Failed to upload file: " + fileName);
+          entry.close();
+          root.close();
+          return;
+        }
+      }
     }
 
-    SD.remove("data" + String(fileNum) + ".txt"); //delete file once done
-    ++fileNum;
+    entry.close();
+    entry = root.openNextFile();
   }
+
+  root.close();
+  Serial.println("Processed all files on SD card.");
 }
 
 /**
   readFromSD - Opens SD card to read a file into in series of 2 bytes for 10 bytes total
   precondition - file to read only has 10 bytes, 5 sensors need 2 bytes each
 
-  @param fileNum - which file to read from
+  @param fileName - which file to read from
   @param dataArray - an array of size 5 (due to 5 sensors) holding the data we read. 
   We also return data using this same array
 */
-void readFromSD(size_t fileNum, uint16_t* dataArray){
+void readFromSD(String fileName, uint16_t* dataArray){
+
+  initializeSD();
   
   //Read one file at a time
-  File myFile = SD.open("data" + String(fileNum) + ".txt", FILE_READ);
-  //TODO: add logic to read and combine bytes
+  File myFile = SD.open(fileName, FILE_READ);
+
   for (int i = 0; i < 5; i++) {
     if (myFile.available()) {
       uint8_t bytes[2];
@@ -259,6 +296,7 @@ void readFromSD(size_t fileNum, uint16_t* dataArray){
 
 /**
   writeMain -- function to determine whether to write directly to ThingSpeak or to SD card
+  @param connectedWifi - Boolean to check if we have wifi or not
   //TODO: ADD TO THIS; DONT HESITATE TO EDIT OR CHANGE LOGIC IF YOU DISCOVER SOMETHING BETTER
 */
 
@@ -266,31 +304,20 @@ void writeMain(bool connectedWifi){
 
   uint16_t sensorValues[5]; //Array to store all sensor readings
 
-	if (!initializeSD()){
-		Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime) + " seconds.");
-  	ESP.deepSleep(deepSleepTime);
-    return;
-	}
+	initializeSD();
 	
   //First, check if we have wifi.
   if (connectedWifi) {
 		ThingSpeak.begin(client); 
-		readAllFromSD(dataList); 
-
-    //If list is empty, for loop is no-op
-		for (size_t i = 0; i < dataList.size(); ++i){
-			size_t dataSlot = i%5;
-			sensorValues[dataSlot] = dataList.get(i);
-
-      // Batch is ready to send once dataSlot == 4
-			if (dataSlot == 4){
-				writeToThingSpeak(sensorValues);
-				delay(15000); // ThingSpeak 15 sec rate limit
-			}
-		}
+		readAllFromSD(); 
     
 		readSensors(sensorValues);
-		writeToThingSpeak(sensorValues);
+		bool success = writeToThingSpeak(sensorValues);
+
+    // Just in case we didn't write properly
+    if (!success){
+      writeToSD(sensorValues);
+    }
 
   } else { // Don't have wifi, so let's just read and write to SD.
 		readSensors(sensorValues);
@@ -299,24 +326,34 @@ void writeMain(bool connectedWifi){
 }
 
 /**
-  initializeSD - a void helper method to initialize the SD card.
-  @return -- True if SD card successfully initialized, false otherwise. 
+  initializeSD - a void helper method to initialize the SD card. Goes to deepSleep if failed to initialize.
 */
-bool initializeSD(){
+void initializeSD(){
+
+  int success = SD.begin(4);
+
+  if (success == 1){
+    Serial.println("SD already initialized!");
+    return;
+  }
+
   Serial.println("Initializing SD Card...");
+
   for (size_t i = 1; i <= 5; i++){
-    int success = SD.begin(4); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
+    success = SD.begin(4); //TODO: Could take a parameter; need Electrical to say which pin SD module is connected
     Serial.println("Initializing attempt: " + String(i));
     if (success == 1){
       Serial.println("SD Card Initialized!");
-      return true;
+      return;
     }
+
     delay(5000); //Was told it needs 5-10 sec to connect
-    
   }
 
   Serial.println("Initialization failed!");
-	return false;
+	Serial.println("\nEntering Deep Sleep for " + String(deepSleepTime / 1000000) + " seconds.");
+  ESP.deepSleep(deepSleepTime);
+	return;
     
 }
 
@@ -339,7 +376,4 @@ uint16_t combineBytes(uint8_t bytes[]){
   memcpy(&twoBytes, bytes, 2);
   return twoBytes;
 }
-
-
-
 
