@@ -1,4 +1,4 @@
-Steps to Upload Code to Board for the First Time 
+<h1>Steps to Upload Code to Board for the First Time: </h1>
 
 1. Use Arduino IDE, not web browser 
 
@@ -12,6 +12,8 @@ Steps to Upload Code to Board for the First Time
 
 Note: The SPI and Wifi libraries should have been added already from Step 3 
 
+<h1>Connecting the Arduino to vuDevices:</h1>
+
 - Register device with Vanderbilt in order to connect to Wifi 
 
 - This requires running a script to find the MAC address of the Thing Dev (Should print on Serial Monitor) 
@@ -24,7 +26,7 @@ Note: The SPI and Wifi libraries should have been added already from Step 3
 
  
 
-Steps to Read Board’s Serial Messages 
+<h1>Steps to Read Board’s Serial Messages (debug messages)</h1>
 
 1. Go to Tools -> Serial Monitor 
 
