@@ -1,0 +1,9 @@
+# General / editor
+.history/
+*.lck
+*.bak
+
+# KiCad
+*-backups/
+_autosave-*
+fp-info-cache
