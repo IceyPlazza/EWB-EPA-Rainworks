@@ -12,6 +12,10 @@
 - Thingspeak overview for data collection can be found in thingspeak_data_collection.md
 - Additional helpful resources in resources.md
 
+<h1> NEW FOR 2026-2027 </h1>
+
+All teams will now be using GitHub for version control!
+
 <h1>Contact me if you have any questions! (Or send me code):</h1>
 
 - iven.chen@vanderbilt.edu
