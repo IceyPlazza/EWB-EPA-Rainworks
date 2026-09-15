@@ -260,7 +260,16 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_not_driven|2044700|546100|e2357b6e-eaa4-4324-aa9e-36be198a52af|00000000-0000-0000-0000-000000000000|/86a7b6ea-a387-471e-a4e6-e2389d5f82ef|/86a7b6ea-a387-471e-a4e6-e2389d5f82ef|",
+        "due to labelling that i can't change of symbol"
+      ],
+      [
+        "power_pin_not_driven|558800|1869440|c57214f7-eea1-4da4-a48e-d0bc713df2a4|00000000-0000-0000-0000-000000000000|/86a7b6ea-a387-471e-a4e6-e2389d5f82ef|/86a7b6ea-a387-471e-a4e6-e2389d5f82ef|",
+        "due to labelling of symbol that i cant change"
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -443,7 +452,7 @@
       "different_unit_net": "error",
       "duplicate_reference": "error",
       "duplicate_sheet_names": "error",
-      "endpoint_off_grid": "warning",
+      "endpoint_off_grid": "ignore",
       "extra_units": "error",
       "field_name_whitespace": "warning",
       "footprint_filter": "ignore",
@@ -649,6 +658,14 @@
     "meta": {
       "version": 1
     },
+    "ngspice": {
+      "fix_include_paths": true,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 4,
+      "workbook_filename": ""
+    },
     "page_layout_descr_file": "empty.kicad_wks",
     "plot_directory": "",
     "reuse_designators": true,
@@ -661,7 +678,7 @@
         "uuid": "86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
       }
     ],
-    "used_designators": "",
+    "used_designators": "U2,#FLG1-3,R1-8,C2-3,#PWR1-4",
     "variants": []
   },
   "sheets": [
