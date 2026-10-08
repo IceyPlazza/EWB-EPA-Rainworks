@@ -524,7 +524,7 @@
     "last_paths": {
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "C:/Users/vivia/Downloads/VU/club information/EWB/rainworks info/gerbers for 10-8 order/",
       "specctra_dsn": "",
       "step": "",
       "vrml": ""
@@ -669,7 +669,7 @@
         "uuid": "86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
       }
     ],
-    "used_designators": "U2,#FLG1-3,R1-8,C2-3,#PWR1-4",
+    "used_designators": "U2,#FLG1-3,R1-8,C2-3,#PWR1-4,TP1-10",
     "variants": []
   },
   "sheets": [
