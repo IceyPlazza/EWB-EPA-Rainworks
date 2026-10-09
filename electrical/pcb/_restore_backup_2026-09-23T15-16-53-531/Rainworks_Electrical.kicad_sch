@@ -747,129 +747,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:TestPoint"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.762)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "TP"
-				(at 0 6.858 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "TestPoint"
-				(at 0 5.08 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 5.08 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "test point"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "test point tp"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Pin* Test*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "TestPoint_0_1"
-				(circle
-					(center 0 3.302)
-					(radius 0.762)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "TestPoint_1_1"
-				(pin passive line
-					(at 0 0 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -3723,12 +3600,6 @@
 		(uuid "406dfe14-79e4-4761-9469-a57143c016ed")
 	)
 	(junction
-		(at 172.72 115.57)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4617a440-c9e2-4c25-afea-6b7865487fdd")
-	)
-	(junction
 		(at 237.49 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3741,22 +3612,10 @@
 		(uuid "4c214c0d-ff85-4eb5-8bcb-da55b3839498")
 	)
 	(junction
-		(at 85.09 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "54daa0f2-8b3c-4f39-8de5-5070ced1f607")
-	)
-	(junction
 		(at 55.88 125.73)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "5e344e06-4e07-4672-ab28-3ee20243ee99")
-	)
-	(junction
-		(at 166.37 123.19)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "617a5407-2ba5-4626-b23d-4d68d55b9e6f")
 	)
 	(junction
 		(at 101.6 39.37)
@@ -3783,6 +3642,12 @@
 		(uuid "7913d765-1077-48d9-b133-5e50a3f2870d")
 	)
 	(junction
+		(at 85.09 42.672)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "79416f25-c204-4ca7-b6f4-61b9b0d366f6")
+	)
+	(junction
 		(at 59.69 68.58)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3805,12 +3670,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9c0a07ff-0cf7-48d2-ac9d-bcfd49cb3a1a")
-	)
-	(junction
-		(at 125.73 185.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9d101a5b-bd52-4e56-a4e2-b392a57d5e10")
 	)
 	(junction
 		(at 78.232 120.65)
@@ -3843,28 +3702,10 @@
 		(uuid "b01b2877-d861-47b9-bd58-78ee7e81853c")
 	)
 	(junction
-		(at 154.94 96.52)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b110db84-f94c-455e-8a2e-1eee264e67e6")
-	)
-	(junction
-		(at 105.41 185.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ba312b3b-a781-4441-ad56-583d458a139c")
-	)
-	(junction
 		(at 189.23 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c01fe22a-c54b-43a4-8320-6e6b78e8b52e")
-	)
-	(junction
-		(at 199.39 120.65)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c5406f0f-331d-4f28-943f-2447f34fb56e")
 	)
 	(junction
 		(at 179.07 63.5)
@@ -3877,12 +3718,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c994ad11-0056-4e0a-a85f-d4c38ab89fec")
-	)
-	(junction
-		(at 109.22 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d88eea90-c24f-4baa-a439-018e5f321b51")
 	)
 	(junction
 		(at 165.1 146.05)
@@ -3903,22 +3738,10 @@
 		(uuid "e08da8ef-40f6-49a8-b62e-9e72883e773b")
 	)
 	(junction
-		(at 93.98 41.91)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e308cf1a-d7e8-4947-b84d-b648c6825773")
-	)
-	(junction
 		(at 101.6 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ea24fc54-f08e-4650-bc34-1b9f36c53f34")
-	)
-	(junction
-		(at 116.84 185.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ec007eeb-b1f1-4796-8a3c-00abfc928f10")
 	)
 	(junction
 		(at 119.126 53.34)
@@ -4038,16 +3861,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 185.42) (xy 116.84 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "023a4cf4-8995-48af-ad1e-58ae69f7d8a0")
-	)
-	(wire
-		(pts
 			(xy 180.34 66.04) (xy 176.53 66.04)
 		)
 		(stroke
@@ -4148,7 +3961,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 120.65) (xy 199.39 120.65)
+			(xy 184.15 120.65) (xy 214.63 120.65)
 		)
 		(stroke
 			(width 0)
@@ -4318,16 +4131,6 @@
 	)
 	(wire
 		(pts
-			(xy 166.37 123.19) (xy 196.85 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "227c8b7d-0544-4076-b699-fa38aedd88c8")
-	)
-	(wire
-		(pts
 			(xy 74.93 88.9) (xy 88.9 88.9)
 		)
 		(stroke
@@ -4355,16 +4158,6 @@
 			(type default)
 		)
 		(uuid "24ca9db6-c324-4ac0-8eea-2b20b0a31323")
-	)
-	(wire
-		(pts
-			(xy 199.39 120.65) (xy 214.63 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "26fb7509-316d-4f65-9a78-70fd0482f5f0")
 	)
 	(wire
 		(pts
@@ -4578,16 +4371,6 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 185.42) (xy 125.73 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "46427d44-3f1e-4c12-8704-b4df57f6deba")
-	)
-	(wire
-		(pts
 			(xy 119.126 53.34) (xy 119.126 105.664)
 		)
 		(stroke
@@ -4708,7 +4491,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 41.91) (xy 93.98 41.91)
+			(xy 85.09 42.672) (xy 115.57 42.672)
 		)
 		(stroke
 			(width 0)
@@ -4738,7 +4521,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 39.37) (xy 109.22 39.37)
+			(xy 101.6 39.37) (xy 112.014 39.37)
 		)
 		(stroke
 			(width 0)
@@ -5108,16 +4891,6 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 138.43) (xy 179.07 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "868ea47c-060d-41b3-bffd-96b0679f8296")
-	)
-	(wire
-		(pts
 			(xy 88.9 118.11) (xy 88.9 115.57)
 		)
 		(stroke
@@ -5218,16 +4991,6 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 39.37) (xy 112.014 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "991c8a2e-9ee9-4660-bab5-0888dccdd49c")
-	)
-	(wire
-		(pts
 			(xy 118.364 36.068) (xy 237.49 36.068)
 		)
 		(stroke
@@ -5255,6 +5018,16 @@
 			(type default)
 		)
 		(uuid "a14d871a-7fff-437e-90cc-abbeaaf3fe3f")
+	)
+	(wire
+		(pts
+			(xy 165.1 138.43) (xy 179.07 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a151af10-59c0-4da6-a219-a9694b3c958e")
 	)
 	(wire
 		(pts
@@ -5348,7 +5121,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.306 123.19) (xy 166.37 123.19)
+			(xy 162.306 123.19) (xy 196.85 123.19)
 		)
 		(stroke
 			(width 0)
@@ -5365,16 +5138,6 @@
 			(type default)
 		)
 		(uuid "b2ec38c9-43d8-4ba5-a5f5-9a0fffc42103")
-	)
-	(wire
-		(pts
-			(xy 158.75 137.16) (xy 158.75 138.43)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b46fa230-1038-48d7-be10-29b3cf1efb49")
 	)
 	(wire
 		(pts
@@ -5438,17 +5201,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 96.52) (xy 253.492 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba7785b4-8a40-4fde-b9e9-6212cabc01ea")
-	)
-	(wire
-		(pts
-			(xy 85.09 40.64) (xy 85.09 41.91)
+			(xy 85.09 40.64) (xy 85.09 42.672)
 		)
 		(stroke
 			(width 0)
@@ -5518,7 +5271,7 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 185.42) (xy 105.41 185.42)
+			(xy 55.88 185.42) (xy 135.89 185.42)
 		)
 		(stroke
 			(width 0)
@@ -5608,23 +5361,13 @@
 	)
 	(wire
 		(pts
-			(xy 150.876 96.52) (xy 154.94 96.52)
+			(xy 150.876 96.52) (xy 253.492 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "d853f1f5-08e7-42fb-b5c0-5bf8639f111e")
-	)
-	(wire
-		(pts
-			(xy 125.73 185.42) (xy 135.89 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d8b30654-811c-44db-8460-28a6d0951d58")
 	)
 	(wire
 		(pts
@@ -5698,16 +5441,6 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 41.91) (xy 115.57 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea2ff1d4-baf6-43b8-8d9a-afe6e0ce8b95")
-	)
-	(wire
-		(pts
 			(xy 135.89 146.05) (xy 165.1 146.05)
 		)
 		(stroke
@@ -5718,7 +5451,7 @@
 	)
 	(wire
 		(pts
-			(xy 115.57 41.91) (xy 115.57 33.02)
+			(xy 115.57 42.672) (xy 115.57 33.02)
 		)
 		(stroke
 			(width 0)
@@ -5828,7 +5561,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 41.91) (xy 85.09 43.18)
+			(xy 85.09 42.672) (xy 85.09 43.18)
 		)
 		(stroke
 			(width 0)
@@ -6097,85 +5830,6 @@
 		(uuid "fe33a699-749d-49d3-95a9-9a45171f10ef")
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 199.39 120.65 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "02d5eb45-d462-47b4-babc-9aa71211b75f")
-		(property "Reference" "TP9"
-			(at 201.93 116.0779 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "CS_TP"
-			(at 201.93 118.6179 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 204.47 120.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 204.47 120.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 199.39 120.65 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b8628233-4b35-4022-9230-ed99a01740ae")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "472192001")
 		(at 225.806 127 0)
 		(unit 0)
@@ -6353,85 +6007,6 @@
 			(project "Rainworks_Electrical"
 				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
 					(reference "R7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 172.72 115.57 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "18b37612-f7ba-48d5-b802-f109874359f3")
-		(property "Reference" "TP7"
-			(at 175.26 110.9979 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MISO_TP"
-			(at 175.26 113.5379 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 177.8 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 177.8 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 172.72 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c948ef2e-20b2-4404-8c65-085b3ee955c4")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP7")
 					(unit 1)
 				)
 			)
@@ -6812,85 +6387,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 109.22 39.37 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4a58e5d2-f63c-4fe0-bf78-56d77f8b3b23")
-		(property "Reference" "TP1"
-			(at 111.76 34.7979 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "T_TP"
-			(at 111.76 37.3379 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 114.3 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 114.3 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 109.22 39.37 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "4973e4c7-6920-4aa4-bf8d-80c2c7d6dc66")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C")
 		(at 165.1 142.24 0)
 		(unit 1)
@@ -7104,85 +6600,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 116.84 185.42 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "59a8ebed-3855-4dac-8dba-0f80938a9c39")
-		(property "Reference" "TP4"
-			(at 119.38 180.8479 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "GND"
-			(at 119.38 183.3879 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 121.92 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 121.92 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 116.84 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "49f76949-c939-44e8-8649-4cf9fb3afdaa")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "MCP3008-I/P")
 		(at 218.44 60.96 0)
 		(unit 0)
@@ -7320,85 +6737,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 158.75 137.16 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "70087dd1-4e4f-4188-8591-6178ce7aca1c")
-		(property "Reference" "TP5"
-			(at 161.29 132.5879 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SDVDD_TP"
-			(at 161.29 135.1279 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 163.83 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 163.83 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 158.75 137.16 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "b174884a-ee8c-4a83-91bb-8bfa6810d5fa")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 205.74 109.22 0)
 		(unit 1)
@@ -7481,85 +6819,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 105.41 185.42 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8661dfa2-6f01-4642-84e1-154fc98d77c3")
-		(property "Reference" "TP3"
-			(at 107.95 180.8479 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "GND"
-			(at 107.95 183.3879 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 110.49 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 110.49 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 105.41 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "03dd866d-256d-4522-bf36-91d526ef8d3d")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 85.09 36.83 0)
 		(unit 1)
@@ -7636,164 +6895,6 @@
 			(project "Rainworks_Electrical"
 				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
 					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 93.98 41.91 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a3ecb368-b388-49a2-8499-29fd68986d1c")
-		(property "Reference" "TP2"
-			(at 96.52 37.3379 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "FRTP"
-			(at 96.52 39.8779 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 99.06 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 99.06 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 93.98 41.91 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "7767b8a1-3bdc-4045-b70a-54f7f942765e")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 154.94 96.52 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a5be76fd-cab4-42db-9f5a-6cf5cd7a4c01")
-		(property "Reference" "TP8"
-			(at 157.48 91.9479 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "SCLK_TP"
-			(at 157.48 94.4879 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 160.02 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 160.02 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 154.94 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "c1d91322-166e-424e-856c-a798cfcf0856")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP8")
 					(unit 1)
 				)
 			)
@@ -8700,85 +7801,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 166.37 123.19 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "df80c0eb-fffa-476a-949f-015cbdf606fc")
-		(property "Reference" "TP6"
-			(at 168.91 118.6179 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MOSI_TP"
-			(at 168.91 121.1579 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 171.45 123.19 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 171.45 123.19 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 166.37 123.19 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "a3cb19c5-6e9d-4e74-a4fa-3406d4b6f57e")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 179.07 16.51 0)
 		(unit 1)
@@ -9092,85 +8114,6 @@
 			(project "Rainworks_Electrical"
 				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
 					(reference "#PWR03")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:TestPoint")
-		(at 125.73 185.42 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "fef88319-0b2e-4bbb-9180-26aaa2b6df98")
-		(property "Reference" "TP10"
-			(at 128.27 180.8479 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "GND"
-			(at 128.27 183.3879 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 130.81 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 130.81 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "test point"
-			(at 125.73 185.42 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "81da8615-3cf3-43be-9ecc-0260adb3c8c9")
-		)
-		(instances
-			(project "Rainworks_Electrical"
-				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
-					(reference "TP10")
 					(unit 1)
 				)
 			)
