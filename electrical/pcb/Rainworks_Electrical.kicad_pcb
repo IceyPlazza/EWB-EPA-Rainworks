@@ -53,7 +53,7 @@
 		(aux_axis_origin 90 140)
 		(pcbplotparams
 			(layerselection 0x00000000_00000000_55555555_5755f5ff)
-			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000002_0200a0af)
 			(disableapertmacros no)
 			(usegerberextensions no)
 			(usegerberattributes yes)

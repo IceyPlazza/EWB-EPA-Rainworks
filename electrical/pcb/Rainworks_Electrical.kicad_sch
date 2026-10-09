@@ -3669,12 +3669,6 @@
 		(uuid "ebcbbdcd-e9ef-4b05-9ef3-18aab846b896")
 	)
 	(junction
-		(at 121.92 185.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "04ede008-ad22-4228-bde1-7e181a5867b1")
-	)
-	(junction
 		(at 179.07 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3813,6 +3807,12 @@
 		(uuid "9c0a07ff-0cf7-48d2-ac9d-bcfd49cb3a1a")
 	)
 	(junction
+		(at 125.73 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9d101a5b-bd52-4e56-a4e2-b392a57d5e10")
+	)
+	(junction
 		(at 78.232 120.65)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3913,6 +3913,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ea24fc54-f08e-4650-bc34-1b9f36c53f34")
+	)
+	(junction
+		(at 116.84 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ec007eeb-b1f1-4796-8a3c-00abfc928f10")
 	)
 	(junction
 		(at 119.126 53.34)
@@ -4032,7 +4038,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 185.42) (xy 121.92 185.42)
+			(xy 105.41 185.42) (xy 116.84 185.42)
 		)
 		(stroke
 			(width 0)
@@ -4269,16 +4275,6 @@
 			(type default)
 		)
 		(uuid "1b9ec9fa-74cc-417b-92c3-5ad8fdfa1066")
-	)
-	(wire
-		(pts
-			(xy 121.92 185.42) (xy 135.89 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c7f4338-8944-40d0-8049-7d12636b6d6c")
 	)
 	(wire
 		(pts
@@ -4579,6 +4575,16 @@
 			(type default)
 		)
 		(uuid "4277c809-2e20-407d-89af-ca2af78de533")
+	)
+	(wire
+		(pts
+			(xy 116.84 185.42) (xy 125.73 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "46427d44-3f1e-4c12-8704-b4df57f6deba")
 	)
 	(wire
 		(pts
@@ -5609,6 +5615,16 @@
 			(type default)
 		)
 		(uuid "d853f1f5-08e7-42fb-b5c0-5bf8639f111e")
+	)
+	(wire
+		(pts
+			(xy 125.73 185.42) (xy 135.89 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8b30654-811c-44db-8460-28a6d0951d58")
 	)
 	(wire
 		(pts
@@ -7089,7 +7105,7 @@
 	)
 	(symbol
 		(lib_id "Connector:TestPoint")
-		(at 121.92 185.42 0)
+		(at 116.84 185.42 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7100,7 +7116,7 @@
 		(fields_autoplaced yes)
 		(uuid "59a8ebed-3855-4dac-8dba-0f80938a9c39")
 		(property "Reference" "TP4"
-			(at 124.46 180.8479 0)
+			(at 119.38 180.8479 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7111,7 +7127,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.46 183.3879 0)
+			(at 119.38 183.3879 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7122,7 +7138,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 127 185.42 0)
+			(at 121.92 185.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7133,7 +7149,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 127 185.42 0)
+			(at 121.92 185.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7144,7 +7160,7 @@
 			)
 		)
 		(property "Description" "test point"
-			(at 121.92 185.42 0)
+			(at 116.84 185.42 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9076,6 +9092,85 @@
 			(project "Rainworks_Electrical"
 				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
 					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 125.73 185.42 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fef88319-0b2e-4bbb-9180-26aaa2b6df98")
+		(property "Reference" "TP10"
+			(at 128.27 180.8479 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "GND"
+			(at 128.27 183.3879 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
+			(at 130.81 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 130.81 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "test point"
+			(at 125.73 185.42 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "81da8615-3cf3-43be-9ecc-0260adb3c8c9")
+		)
+		(instances
+			(project "Rainworks_Electrical"
+				(path "/86a7b6ea-a387-471e-a4e6-e2389d5f82ef"
+					(reference "TP10")
 					(unit 1)
 				)
 			)
